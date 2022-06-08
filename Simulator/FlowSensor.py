@@ -13,7 +13,7 @@ class SensorStatus(IntEnum):
 
     
 class FlowSensor():
-    def __init__(self, sensor_ip = "localhost", sensor_port = 10101, sensor_fail_rate = 0):
+    def __init__(self, sensor_ip = "localhost", sensor_port = 10501, sensor_fail_rate = 0):
         
         self.network_ip = sensor_ip
         self.network_port = sensor_port
@@ -23,7 +23,7 @@ class FlowSensor():
         
     
     def read_sensor_value(self):
-        return int(self.sensor_value)
+        return float(self.sensor_value)
     
     def read_sensor_status(self):
         return int(self.sensor_status)

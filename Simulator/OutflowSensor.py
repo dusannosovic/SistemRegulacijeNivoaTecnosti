@@ -24,8 +24,8 @@ class WaterLevel(IntEnum):
     Level100percent= 100
 
     
-class LevelSensor():
-    def __init__(self, sensor_ip = "localhost", sensor_port = 10401, sensor_fail_rate = 0):
+class OutflowSensor():
+    def __init__(self, sensor_ip = "localhost", sensor_port = 10402, sensor_fail_rate = 0):
         
         self.network_ip = sensor_ip
         self.network_port = sensor_port
@@ -44,9 +44,9 @@ class LevelSensor():
         return self.sensor_path
     def set_sensor_value(self,temp_value):
         #if temp_value<=max_value:
-        #   value_percent = temp_value/max_value*100
-        #   round_value = round(value_percent/10)*10
-        #   self.sensor_value = round_value
+        #    value_percent = temp_value/max_value*100
+        #    round_value = round(value_percent/10)*10
+        #    self.sensor_value = round_value
         self.sensor_value = temp_value
             
     
