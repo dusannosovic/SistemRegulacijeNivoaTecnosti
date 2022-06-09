@@ -40,8 +40,7 @@ class OutflowSensor():
         return float(self.sensor_value)
     def read_sensor_status(self):
         return int(self.sensor_status)
-    def read_sensor_path(self):
-        return self.sensor_path
+    
     def set_sensor_value(self,temp_value):
         #if temp_value<=max_value:
         #    value_percent = temp_value/max_value*100

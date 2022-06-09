@@ -2,6 +2,11 @@ from multiprocessing.sharedctypes import Value
 import threading
 import time
 import random
+from flask import Flask
+from flask_restful import Api
+from ApiResources.ApiFlowSensor import ApiFlowSensor
+from ApiResources.ApiLevelSensor import ApiLevelSensor
+from ApiResources.ApiOutflowSensor import ApiOutflowSensor
 from LevelSensor import LevelSensor
 from FlowSensor import FlowSensor
 from Valve1 import Valve1
@@ -35,6 +40,7 @@ def thread_function(level_sensor, flow_sensor, valve1, valve2, valve3, water_pum
         level_sensor.set_sensor_value(water_tank)
         outflow_sensor.set_sensor_value(outflow_water_tank)
         
+        print("-------------------------------------------------------")
         print("Level sensor",level_sensor.read_sensor_value(), "cm")
         print("Outflow sensor",outflow_sensor.read_sensor_value(),"cm")
         print("Flow sensor", flow_sensor.read_sensor_value(),"cm") 
@@ -59,7 +65,19 @@ if __name__ == "__main__":
     water_pump.set_pump_operation(1)
     water_pump.set_pump_capacity(15)
     outflow_sensor = OutflowSensor()
-
+    
+    app = Flask(__name__)
+    api = Api(app)
+    
+    api.add_resource(ApiFlowSensor, "/flowsensor/<string:parameter>")
+    api.add_resource(ApiLevelSensor, "/levelsensor/<string:parameter>")
+    api.add_resource(ApiOutflowSensor,"/outflowsensor/<string:parameter>")
+    
+    app.config['flow_sensor'] = flow_sensor
+    app.config['level_sensor'] = level_sensor
+    app.config['outflow_sensor'] = outflow_sensor
 
     x = threading.Thread(target=thread_function, args=(level_sensor,flow_sensor,valve1,valve2,valve3,water_pump,servo_valve,outflow_sensor,))
     x.start()
+    
+    app.run()
