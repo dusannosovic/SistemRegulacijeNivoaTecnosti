@@ -28,7 +28,7 @@ class ApiFlowSensor(Resource):
 
         flow_sensor = current_app.config['flow_sensor']
 
-        if parameter == "status":
+        if parameter == "reset":
             
             temp = flow_sensor.reset_sensor()
 

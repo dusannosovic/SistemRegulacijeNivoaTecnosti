@@ -28,7 +28,7 @@ class WaterPump():
         return int(self.pump_operation)
     
     def set_pump_operation(self, number):
-        self.pump_operation = number
+        self.pump_operation = PumpOperation(number)
     def read_water_per_second(self):
         return int(self.pump_water_per_second)
     def set_pump_capacity(self, water_per_second):

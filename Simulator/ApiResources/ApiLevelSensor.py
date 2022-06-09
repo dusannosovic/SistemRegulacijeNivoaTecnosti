@@ -27,7 +27,7 @@ class  ApiLevelSensor(Resource):
 
         level_sensor = current_app.config['level_sensor']
 
-        if parameter == "status":
+        if parameter == "reset":
 
             temp = level_sensor.reset_sensor()
 

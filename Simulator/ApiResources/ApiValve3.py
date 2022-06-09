@@ -35,7 +35,11 @@ class ApiValve3(Resource):
             try:
                 body_params = request.get_json(force=True)
                 new_value = body_params['value']
-                new_value = int(new_value)
+                new_value = round(float(new_value))
+                                
+                if new_value < 0 or new_value > 1:
+                    return json.dumps({"Message": "Invalid value for valve3 status"}), 400
+                
                 valve3.set_valve_status(new_value)
                 return json.dumps({"Message": "Success"}) , 200
             

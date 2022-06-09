@@ -27,7 +27,7 @@ class Valve3():
         return int(self.valve_status)
     
     def set_valve_status(self, number):
-        self.valve_status = number
+        self.valve_status = ValveStatus(number)
     
     
     def reset_valve(self):

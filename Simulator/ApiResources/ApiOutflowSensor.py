@@ -25,7 +25,7 @@ class ApiOutflowSensor(Resource):
 
         outflow_sensor = current_app.config['outflow_sensor']
 
-        if parameter == "status":
+        if parameter == "reset":
             
             temp = outflow_sensor.reset_sensor()
 

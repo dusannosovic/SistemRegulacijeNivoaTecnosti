@@ -35,7 +35,11 @@ class ApiWaterPump(Resource):
             try:
                 body_params = request.get_json(force=True)
                 new_value = body_params['value']
-                new_value = int(new_value)
+                new_value = round(float(new_value))
+                
+                if new_value < 0 or new_value > 1:
+                    return json.dumps({"Message": "Invalid value for water pump status"}), 400
+                
                 water_pump.set_pump_operation(new_value)
                 return json.dumps({"Message": "Success"}) , 200
             

@@ -37,7 +37,7 @@ class ServoValve():
     
     def set_valve_status(self, number):
         round_value = round(number/10)*10
-        self.servo_valve_status = round_value
+        self.servo_valve_status = ServoValveStatus(round_value)
     
     
     def reset_valve(self):
