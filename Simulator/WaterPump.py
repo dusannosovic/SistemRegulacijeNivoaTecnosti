@@ -34,7 +34,7 @@ class WaterPump():
     def set_pump_capacity(self, water_per_second):
         self.pump_water_per_second = water_per_second
     
-    def reset_sensor(self):
+    def reset_pump(self):
         self.pump_operation = PumpOperation.OFF # TODO: implement a more elaborate reset logic
         return 0
         

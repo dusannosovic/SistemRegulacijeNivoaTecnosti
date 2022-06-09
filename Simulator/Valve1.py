@@ -33,7 +33,7 @@ class Valve1():
     def read_water_per_second(self):
         return int(self.water_per_second)
     
-    def reset_sensor(self):
+    def reset_valve(self):
         self.valve_status = ValveStatus.OFF # TODO: implement a more elaborate reset logic
         return 0
         

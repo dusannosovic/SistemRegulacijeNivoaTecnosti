@@ -7,6 +7,11 @@ from flask_restful import Api
 from ApiResources.ApiFlowSensor import ApiFlowSensor
 from ApiResources.ApiLevelSensor import ApiLevelSensor
 from ApiResources.ApiOutflowSensor import ApiOutflowSensor
+from ApiResources.ApiServoValve import ApiServoValve
+from ApiResources.ApiValve1 import ApiValve1
+from ApiResources.ApiValve2 import ApiValve2
+from ApiResources.ApiValve3 import ApiValve3
+from ApiResources.ApiWaterPump import ApiWaterPump
 from LevelSensor import LevelSensor
 from FlowSensor import FlowSensor
 from Valve1 import Valve1
@@ -69,13 +74,27 @@ if __name__ == "__main__":
     app = Flask(__name__)
     api = Api(app)
     
+    #sensor resources
     api.add_resource(ApiFlowSensor, "/flowsensor/<string:parameter>")
     api.add_resource(ApiLevelSensor, "/levelsensor/<string:parameter>")
     api.add_resource(ApiOutflowSensor,"/outflowsensor/<string:parameter>")
     
+    #actuator resources
+    api.add_resource(ApiServoValve, "/servovalve/<string:parameter>")
+    api.add_resource(ApiValve1, "/valve1/<string:parameter>")
+    api.add_resource(ApiValve2, "/valve2/<string:parameter>")
+    api.add_resource(ApiValve3, "/valve3/<string:parameter>")
+    api.add_resource(ApiWaterPump, "/waterpump/<string:parameter>")
+    
+    
     app.config['flow_sensor'] = flow_sensor
     app.config['level_sensor'] = level_sensor
     app.config['outflow_sensor'] = outflow_sensor
+    app.config['servo_valve'] = servo_valve
+    app.config['valve1'] = valve1
+    app.config['valve2'] = valve2
+    app.config['valve3'] = valve3
+    app.config['water_pump'] = water_pump
 
     x = threading.Thread(target=thread_function, args=(level_sensor,flow_sensor,valve1,valve2,valve3,water_pump,servo_valve,outflow_sensor,))
     x.start()

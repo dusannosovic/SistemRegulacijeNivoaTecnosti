@@ -40,7 +40,7 @@ class ServoValve():
         self.servo_valve_status = round_value
     
     
-    def reset_sensor(self):
+    def reset_valve(self):
         self.servo_valve_status = ServoValveStatus.Level0percent # TODO: implement a more elaborate reset logic
         return 0
         

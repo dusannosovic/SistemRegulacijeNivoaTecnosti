@@ -30,7 +30,7 @@ class Valve3():
         self.valve_status = number
     
     
-    def reset_sensor(self):
+    def reset_valve(self):
         self.valve_status = ValveStatus.OFF # TODO: implement a more elaborate reset logic
         return 0
         
