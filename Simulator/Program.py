@@ -12,6 +12,7 @@ from ApiResources.ApiValve1 import ApiValve1
 from ApiResources.ApiValve2 import ApiValve2
 from ApiResources.ApiValve3 import ApiValve3
 from ApiResources.ApiWaterPump import ApiWaterPump
+from ApiResources.ApiSimulator import ApiSimulator
 from LevelSensor import LevelSensor
 from FlowSensor import FlowSensor
 from Valve1 import Valve1
@@ -85,6 +86,10 @@ if __name__ == "__main__":
     api.add_resource(ApiValve2, "/valve2/<string:parameter>")
     api.add_resource(ApiValve3, "/valve3/<string:parameter>")
     api.add_resource(ApiWaterPump, "/waterpump/<string:parameter>")
+    
+    #data resource (all necessary data for InView)
+    api.add_resource(ApiSimulator, "/data")
+    
     
     
     app.config['flow_sensor'] = flow_sensor
