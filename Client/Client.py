@@ -3,7 +3,8 @@ import requests
 
 def main():
 
-    baseURL = "http://localhost:5000/"
+    baseURL = "http://simulator:5000/"
+    #baseURL = "http://localhost:5000/"
 
     sensor_operation = "Choose operation:\n 1. Read value\n 2. Read status\n 3. Reset sensor\n"
     servo_valve_operation = "Choose operation:\n 1. Read value\n 2. Set value\n 3. Reset\n"

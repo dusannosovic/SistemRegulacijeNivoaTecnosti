@@ -104,4 +104,4 @@ if __name__ == "__main__":
     x = threading.Thread(target=thread_function, args=(level_sensor,flow_sensor,valve1,valve2,valve3,water_pump,servo_valve,outflow_sensor,))
     x.start()
     
-    app.run()
+    app.run(host="0.0.0.0",port=5000)

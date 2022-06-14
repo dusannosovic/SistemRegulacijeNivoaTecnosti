@@ -1,0 +1,14 @@
+version: '3.5'
+networks:
+  default:
+    name: client-simulator
+    driver: bridge
+services:
+  simulator:
+    image: simulator
+    ports:
+      - 5000:5000
+  client:
+    image: client 
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
