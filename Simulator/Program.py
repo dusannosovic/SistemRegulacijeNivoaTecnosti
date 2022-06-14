@@ -31,7 +31,7 @@ def thread_function(level_sensor, flow_sensor, valve1, valve2, valve3, water_pum
     while(True):
         
         
-        water_flow= water_pump.read_water_per_second()*valve3.read_valve_status()*servo_valve.read_valve_status()/100
+        water_flow= water_pump.read_water_per_second()*water_pump.read_pump_operation()*valve3.read_valve_status()*servo_valve.read_valve_status()/100
         flow_sensor.set_sensor_value(water_flow)
         #water_tank += water_flow
         outflow = 0
