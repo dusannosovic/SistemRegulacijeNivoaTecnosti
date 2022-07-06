@@ -1,0 +1,17 @@
+ibis_2022/NivoRegTecnosti/Ventil1/Value
+ibis_2022/NivoRegTecnosti/Ventil1/Status
+ibis_2022/NivoRegTecnosti/Ventil2/Value
+ibis_2022/NivoRegTecnosti/Ventil2/Status
+ibis_2022/NivoRegTecnosti/Ventil3/Value
+ibis_2022/NivoRegTecnosti/Ventil3/Status
+ibis_2022/NivoRegTecnosti/ServoVentil/Value
+ibis_2022/NivoRegTecnosti/ServoVentil/Status
+ibis_2022/NivoRegTecnosti/Waterpump/Value
+ibis_2022/NivoRegTecnosti/Waterpump/Status
+
+ibis_2022/NivoRegTecnosti/FlowSensor/Value
+ibis_2022/NivoRegTecnosti/FlowSensor/Status
+ibis_2022/NivoRegTecnosti/LevelSensor/Value
+ibis_2022/NivoRegTecnosti/LevelSensor/Status
+ibis_2022/NivoRegTecnosti/OutflowSensor/Value
+ibis_2022/NivoRegTecnosti/OutflowSensor/Status
