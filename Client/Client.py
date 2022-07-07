@@ -2,21 +2,14 @@ from concurrent.futures import thread
 from threading import Thread
 import requests
 import OnChange
+import json
 import time
-
+from ConfigMQTT import *
 from paho.mqtt import client as mqtt_client
-baseURL = "http://simulator:5000/"
-
-broker = 'test.mosquitto.org'
-port = 1883
-topic = ["ibis_2022/NivoRegTecnosti/Ventil1/Value","ibis_2022/NivoRegTecnosti/Ventil2/Value"
-,"ibis_2022/NivoRegTecnosti/Ventil3/Value","ibis_2022/NivoRegTecnosti/ServoVentil/Value","ibis_2022/NivoRegTecnosti/Waterpump/Value",
-"ibis_2022/NivoRegTecnosti/Ventil1/Reset","ibis_2022/NivoRegTecnosti/Ventil2/Reset","ibis_2022/NivoRegTecnosti/Ventil3/Reset","ibis_2022/NivoRegTecnosti/ServoVentil/Reset"
-,"ibis_2022/NivoRegTecnosti/Waterpump/Reset"]
-# generate client ID with pub prefix randomly
-client_id = 'Python1'
 
 
+#baseURL = "http://simulator:5000/"
+baseURL = "http://localhost:5000/"
 
 def connect_mqtt() -> mqtt_client:
     def on_connect(client, userdata, flags, rc):
@@ -25,9 +18,9 @@ def connect_mqtt() -> mqtt_client:
         else:
             print("Failed to connect, return code %d\n", rc)
 
-    client = mqtt_client.Client(client_id)
+    client = mqtt_client.Client(CLIENT_ID)
     client.on_connect = on_connect
-    client.connect(broker, port)
+    client.connect(BROKER, PORT)
     return client
 
 
@@ -36,19 +29,19 @@ def subscribe(client: mqtt_client):
         print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
         try:
             if "Ventil1/Value" in msg.topic:
-                ret_val = requests.put(baseURL+"valve1/status", json={"value": msg.payload.decode})
+                ret_val = requests.put(baseURL+"valve1/status", json={"value": msg.payload.decode()})
                 print(ret_val.json())
             elif "Ventil2/Value" in msg.topic:
-                ret_val = requests.put(baseURL+"valve2/status", json={"value": msg.payload.decode})
+                ret_val = requests.put(baseURL+"valve2/status", json={"value": msg.payload.decode()})
                 print(ret_val.json())
             elif "Ventil3/Value" in msg.topic:
-                ret_val = requests.put(baseURL+"valve3/status", json={"value": msg.payload.decode})
+                ret_val = requests.put(baseURL+"valve3/status", json={"value": msg.payload.decode()})
                 print(ret_val.json())
             elif "ServoVentil/Value" in msg.topic:
-                ret_val = requests.put(baseURL+"servovalve/status", json={"value": msg.payload.decode})
+                ret_val = requests.put(baseURL+"servovalve/status", json={"value": msg.payload.decode()})
                 print(ret_val.json())
             elif "Waterpump/Value" in msg.topic:
-                ret_val = requests.put(baseURL+"waterpump/status", json={"value": msg.payload.decode})
+                ret_val = requests.put(baseURL+"waterpump/status", json={"value": msg.payload.decode()})
                 print(ret_val.json())
             elif "Ventil1/Reset" in msg.topic:
                 ret_val = requests.put(baseURL+"valve1/reset")
@@ -77,23 +70,24 @@ def subscribe(client: mqtt_client):
         except Exception as some_error:
             print(some_error)
 
-    client.subscribe(topic)
+    client.subscribe(list(TOPICS.values()))
     client.on_message = on_message
 
 
 def run():
-    client = connect_mqtt()
     subscribe(client)
     client.loop_forever()
 
-def DataCheck():
+def DataCheck(client):
     while True:
         ret_val = requests.get(baseURL+"data")
-        print(ret_val.json())
-        time.sleep(1)
+        print(ret_val.json() + "\n")
+        client.publish(ALL_DATA_TOPIC, json.dumps(ret_val.json()))
+        time.sleep(2)
 
 if __name__ == '__main__':
-    dataCheck = Thread(target=DataCheck)
+    client = connect_mqtt()
+    dataCheck = Thread(target=DataCheck, args=[client] )
     dataCheck.start()
     run()
 
