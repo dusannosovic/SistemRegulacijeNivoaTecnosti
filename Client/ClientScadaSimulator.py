@@ -1,109 +1,18 @@
-from concurrent.futures import thread
-from threading import Thread
 import requests
-import OnChange
-import time
+import random
+import PumpValue
 
 from paho.mqtt import client as mqtt_client
 baseURL = "http://simulator:5000/"
 
-broker = 'test.mosquitto.org'
-port = 1883
-topic = ["ibis_2022/NivoRegTecnosti/Ventil1/Value","ibis_2022/NivoRegTecnosti/Ventil2/Value"
-,"ibis_2022/NivoRegTecnosti/Ventil3/Value","ibis_2022/NivoRegTecnosti/ServoVentil/Value","ibis_2022/NivoRegTecnosti/Waterpump/Value",
-"ibis_2022/NivoRegTecnosti/Ventil1/Reset","ibis_2022/NivoRegTecnosti/Ventil2/Reset","ibis_2022/NivoRegTecnosti/Ventil3/Reset","ibis_2022/NivoRegTecnosti/ServoVentil/Reset"
-,"ibis_2022/NivoRegTecnosti/Waterpump/Reset"]
-# generate client ID with pub prefix randomly
-client_id = 'Python1'
-
-
-
-def connect_mqtt() -> mqtt_client:
-    def on_connect(client, userdata, flags, rc):
-        if rc == 0:
-            print("Connected to MQTT Broker!")
-        else:
-            print("Failed to connect, return code %d\n", rc)
-
-    client = mqtt_client.Client(client_id)
-    client.on_connect = on_connect
-    client.connect(broker, port)
-    return client
-
-
-def subscribe(client: mqtt_client):
-    def on_message(client, userdata, msg):
-        print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
-        try:
-            if "Ventil1/Value" in msg.topic:
-                ret_val = requests.put(baseURL+"valve1/status", json={"value": msg.payload.decode})
-                print(ret_val.json())
-            elif "Ventil2/Value" in msg.topic:
-                ret_val = requests.put(baseURL+"valve2/status", json={"value": msg.payload.decode})
-                print(ret_val.json())
-            elif "Ventil3/Value" in msg.topic:
-                ret_val = requests.put(baseURL+"valve3/status", json={"value": msg.payload.decode})
-                print(ret_val.json())
-            elif "ServoVentil/Value" in msg.topic:
-                ret_val = requests.put(baseURL+"servovalve/status", json={"value": msg.payload.decode})
-                print(ret_val.json())
-            elif "Waterpump/Value" in msg.topic:
-                ret_val = requests.put(baseURL+"waterpump/status", json={"value": msg.payload.decode})
-                print(ret_val.json())
-            elif "Ventil1/Reset" in msg.topic:
-                ret_val = requests.put(baseURL+"valve1/reset")
-                print(ret_val.json())
-            elif "Ventil2/Reset" in msg.topic:
-                ret_val = requests.put(baseURL+"valve2/reset")
-                print(ret_val.json())
-            elif "Ventil3/Reset" in msg.topic:
-                ret_val = requests.put(baseURL+"valve3/reset")
-                print(ret_val.json())
-            elif "ServoVentil/Reset" in msg.topic:
-                ret_val = requests.put(baseURL+"servovalve/reset")
-                print(ret_val.json())
-            elif "Waterpump/Reset" in msg.topic:
-                ret_val = requests.put(baseURL+"waterpump/reset")
-                print(ret_val.json())
-            elif "FlowSensor/Reset" in msg.topic:
-                ret_val = requests.put(baseURL+"flowsensor/reset")
-                print(ret_val.json())        
-            elif "LevelSensor/Reset" in msg.topic:
-                ret_val = requests.put(baseURL+"levelsensor/reset")
-                print(ret_val.json())        
-            elif "OutflowSensor/Reset" in msg.topic:
-                ret_val = requests.put(baseURL+"outflowsensor/reset")
-                print(ret_val.json())                        
-        except Exception as some_error:
-            print(some_error)
-
-    client.subscribe(topic)
-    client.on_message = on_message
-
-
-def run():
-    client = connect_mqtt()
-    subscribe(client)
-    client.loop_forever()
-
-def DataCheck():
-    while True:
-        ret_val = requests.get(baseURL+"data")
-        print(ret_val.json())
-        time.sleep(1)
-
-if __name__ == '__main__':
-    dataCheck = Thread(target=DataCheck)
-    dataCheck.start()
-    run()
-
-""" def PumpSendValue(new_value):
+def PumpSendValue(new_value):
     #new_value = input(valve_pump_status_values)
     ret_val = requests.put(baseURL+"waterpump/status", json={"value": new_value})
-    print(ret_val.json()) """
+    print(ret_val.json())
 
 
-""" def main():
+
+def main():
 
     baseURL = "http://simulator:5000/"
     #baseURL = "http://localhost:5000/"
@@ -279,4 +188,3 @@ if __name__ == '__main__':
 
 if __name__ == "__main__":
     main()
- """
