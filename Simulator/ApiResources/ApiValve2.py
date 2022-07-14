@@ -47,7 +47,7 @@ class ApiValve2(Resource):
                 return json.dumps({f"Message": "Error. Expected json format: { 'value' : [your number here] }."}), 400
             
             except ValueError as exception:
-                return json.dumps({f"Message": str(exception)})
+                return json.dumps({f"Message": str(exception)}), 400
             
             except BaseException as exception:
                 print(str(exception))
