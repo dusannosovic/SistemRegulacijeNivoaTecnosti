@@ -1,5 +1,5 @@
 import json
-from flask import current_app
+from flask import current_app, jsonify, make_response
 from flask_restful import Resource
 
 class ApiSimulator(Resource):
@@ -44,8 +44,7 @@ class ApiSimulator(Resource):
                     "status": water_pump.read_pump_operation()
                 },
             }   
-        
-            return json.dumps(ret_val) , 200
+            return make_response(jsonify(ret_val) , 200)
         
         except Exception as exception:
             print(exception)
