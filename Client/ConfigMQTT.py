@@ -1,7 +1,9 @@
 
 BROKER = "localhost"
 #BROKER = 'test.mosquitto.org'
-#BROKER_ADDRESS = "85.119.83.194"
+#BROKER = 'broker.hivemq.com'
+#BROKER = 'mqtt.fluux.io'
+#BROKER = 'broker.emqx.io'
 
 PORT = 1883
 # generate client ID with pub prefix randomly
