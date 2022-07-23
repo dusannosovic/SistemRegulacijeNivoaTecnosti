@@ -82,44 +82,57 @@ def run():
     client.loop_forever()
     
 
-def ParseAndProcessData(data, valve1, valve2, valve3, servo_valve, water_pump, flow_sensor, level_sensor, outflow_sensor):
+#def ParseAndProcessData(data, valve1, valve2, valve3, servo_valve, water_pump, flow_sensor, level_sensor, outflow_sensor):
+def ParseAndProcessData(data, client):
     #valve1 props
-    valve1.status = data["valve1"]["status"]
+    #valve1.status = data["valve1"]["status"]
+    client.publish(TOPIC_FOR_INVIEW["valve1_status"], data["valve1"]["status"])
     
     #valve2 props
-    valve2.status = data["valve2"]["status"]
+    #valve2.status = data["valve2"]["status"]
+    client.publish(TOPIC_FOR_INVIEW["valve2_status"], data["valve2"]["status"])
     
     #valve3 props
-    valve3.status = data["valve3"]["status"]
+    #valve3.status = data["valve3"]["status"]
+    client.publish(TOPIC_FOR_INVIEW["valve3_status"], data["valve3"]["status"])
     
     #servo valve props
-    servo_valve.status = data["servo_valve"]["status"]
+    #servo_valve.status = data["servo_valve"]["status"]
+    client.publish(TOPIC_FOR_INVIEW["servo_valve_status"], data["servo_valve"]["status"])
     
     #waterpump props
-    water_pump.status = data["water_pump"]["status"]
+    #water_pump.status = data["water_pump"]["status"]
+    client.publish(TOPIC_FOR_INVIEW["water_pump_status"], data["water_pump"]["status"])
     
     #flow sensor props
-    flow_sensor.status = data["flow_sensor"]["status"]
-    flow_sensor.value = data["flow_sensor"]["value"]
+    #flow_sensor.status = data["flow_sensor"]["status"]
+    #flow_sensor.value = data["flow_sensor"]["value"]
+    client.publish(TOPIC_FOR_INVIEW["flow_sensor_status"], data["flow_sensor"]["status"])
+    client.publish(TOPIC_FOR_INVIEW["flow_sensor_value"], data["flow_sensor"]["value"])
+    
     
     #level sensor props
-    level_sensor.status = data["level_sensor"]["status"]
-    level_sensor.value = data["level_sensor"]["value"]
+    # level_sensor.status = data["level_sensor"]["status"]
+    # level_sensor.value = data["level_sensor"]["value"]
+    client.publish(TOPIC_FOR_INVIEW["level_sensor_status"], data["level_sensor"]["status"])
+    client.publish(TOPIC_FOR_INVIEW["level_sensor_value"], data["level_sensor"]["value"])
     
     #outflow sensor props
-    outflow_sensor.status = data["outflow_sensor"]["status"]
-    outflow_sensor.value = data["outflow_sensor"]["value"]
+    # outflow_sensor.status = data["outflow_sensor"]["status"]
+    # outflow_sensor.value = data["outflow_sensor"]["value"]
+    client.publish(TOPIC_FOR_INVIEW["outflow_sensor_status"], data["outflow_sensor"]["status"])
+    client.publish(TOPIC_FOR_INVIEW["outflow_sensor_value"], data["outflow_sensor"]["value"])
 
 def DataCheck(client):
     
-    valve1 = OnChange.OnChangeClass("valve1", client)
-    valve2 = OnChange.OnChangeClass("valve2", client)
-    valve3 = OnChange.OnChangeClass("valve3", client)
-    servo_valve = OnChange.OnChangeClass("servo_valve", client)
-    water_pump = OnChange.OnChangeClass("water_pump", client)
-    flow_sensor = OnChange.OnChangeClass("flow_sensor", client)
-    level_sensor = OnChange.OnChangeClass("level_sensor", client)
-    outflow_sensor = OnChange.OnChangeClass("outflow_sensor", client)
+    # valve1 = OnChange.OnChangeClass("valve1", client)
+    # valve2 = OnChange.OnChangeClass("valve2", client)
+    # valve3 = OnChange.OnChangeClass("valve3", client)
+    # servo_valve = OnChange.OnChangeClass("servo_valve", client)
+    # water_pump = OnChange.OnChangeClass("water_pump", client)
+    # flow_sensor = OnChange.OnChangeClass("flow_sensor", client)
+    # level_sensor = OnChange.OnChangeClass("level_sensor", client)
+    # outflow_sensor = OnChange.OnChangeClass("outflow_sensor", client)
     
     while True:
         try:
@@ -128,7 +141,8 @@ def DataCheck(client):
         
             json_data = json.loads(ret_val.text)
             
-            ParseAndProcessData(json_data, valve1, valve2, valve3, servo_valve, water_pump, flow_sensor, level_sensor, outflow_sensor)
+            #ParseAndProcessData(json_data, valve1, valve2, valve3, servo_valve, water_pump, flow_sensor, level_sensor, outflow_sensor)
+            ParseAndProcessData(json_data, client)
             
             #valve1.status = json_data["valve1"]["status"]
             

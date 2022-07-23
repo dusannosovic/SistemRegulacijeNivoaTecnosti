@@ -23,8 +23,8 @@ def OnConnect(client, userdata, flags, rc):
         initial_topcis = list(TOPIC_FOR_INVIEW.values())
         
         for topic in initial_topcis:
-            client.subscribe(topic+"/Value")
-            client.subscribe(topic+"/Status")
+            client.subscribe(topic)
+            
                 
         #client.subscribe(TOPIC_FOR_INVIEW["valve1"][0] + "/Status")
 

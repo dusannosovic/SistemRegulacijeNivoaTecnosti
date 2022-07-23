@@ -16,7 +16,7 @@ class OnChangeClass:
         if self._value != new_value and self._client != None:
             self._value = new_value
             message = self._name + " -> value -> " + str(self._value)
-            self._client.publish(TOPIC_FOR_INVIEW[self._name] + "/Value", message)
+            self._client.publish(TOPIC_FOR_INVIEW[self._name] + "/Value", self._value)
             #self._client.publish(TOPIC_FOR_INVIEW[self._name] + "/Value", self._value)
             #self._notify_observers(new_value)
 

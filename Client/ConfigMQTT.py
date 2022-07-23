@@ -1,7 +1,7 @@
 
-BROKER = "localhost"
+#BROKER = "localhost"
 #BROKER = 'test.mosquitto.org'
-#BROKER = 'broker.hivemq.com'
+BROKER = 'broker.hivemq.com'
 #BROKER = 'mqtt.fluux.io'
 #BROKER = 'broker.emqx.io'
 
@@ -46,15 +46,19 @@ TOPICS = {
 # Senzori   -> na kraj topica dodati '/Status' i '/Value'
 
 TOPIC_FOR_INVIEW = {
-    "valve1": "ibis_2022/NivoRegTecnosti/InView/Ventil1",
-    "valve2": "ibis_2022/NivoRegTecnosti/InView/Ventil2",
-    "valve3": "ibis_2022/NivoRegTecnosti/InView/Ventil3",
-    "servo_valve": "ibis_2022/NivoRegTecnosti/InView/ServoVentil",
-    "water_pump": "ibis_2022/NivoRegTecnosti/InView/Waterpump",
+    "valve1_status": "ibis_2022/NivoRegTecnosti/InView/Ventil1/Status",
+    "valve2_status": "ibis_2022/NivoRegTecnosti/InView/Ventil2/Status",
+    "valve3_status": "ibis_2022/NivoRegTecnosti/InView/Ventil3/Status",
+    "servo_valve_status": "ibis_2022/NivoRegTecnosti/InView/ServoVentil/Status",
+    "water_pump_status": "ibis_2022/NivoRegTecnosti/InView/Waterpump/Status",
 
-    "flow_sensor": "ibis_2022/NivoRegTecnosti/InView/FlowSensor",
-    "level_sensor": "ibis_2022/NivoRegTecnosti/InView/LevelSensor",
-    "outflow_sensor": "ibis_2022/NivoRegTecnosti/InView/OutflowSensor",
+    "flow_sensor_status": "ibis_2022/NivoRegTecnosti/InView/FlowSensor/Status",
+    "level_sensor_status": "ibis_2022/NivoRegTecnosti/InView/LevelSensor/Status",
+    "outflow_sensor_status": "ibis_2022/NivoRegTecnosti/InView/OutflowSensor/Status",
+    
+    "flow_sensor_value": "ibis_2022/NivoRegTecnosti/InView/FlowSensor/Value",
+    "level_sensor_value": "ibis_2022/NivoRegTecnosti/InView/LevelSensor/Value",
+    "outflow_sensor_value": "ibis_2022/NivoRegTecnosti/InView/OutflowSensor/Value",
     
     
     #aktuatori imaju samo status
