@@ -2,15 +2,8 @@ import datetime
 import socketserver
 import threading
 import time
-from enum import IntEnum, Enum
 from random import random
-
-
-    
-class PumpOperation(IntEnum):
-    ON = 1 # when pump in operation
-    OFF = 0 # turned off
-    
+from EnumClasses import PumpOperation
 
     
 class WaterPump():

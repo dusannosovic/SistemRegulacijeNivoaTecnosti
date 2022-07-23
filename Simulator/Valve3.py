@@ -2,17 +2,10 @@ import datetime
 import socketserver
 import threading
 import time
-from enum import IntEnum, Enum
 from random import random
+from EnumClasses import ValveStatus
 
 
-    
-class ValveStatus(IntEnum):
-    ON = 1 # valve on
-    OFF = 0 # valve off
-    
-
-    
 class Valve3():
     def __init__(self, pump_ip = "localhost", pump_port = 10103, sensor_fail_rate = 0):
         

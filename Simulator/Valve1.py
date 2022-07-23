@@ -2,14 +2,8 @@ import datetime
 import socketserver
 import threading
 import time
-from enum import IntEnum, Enum
 from random import random
-
-
-    
-class ValveStatus(IntEnum):
-    ON = 1 # valve on
-    OFF = 0 # valve off
+from EnumClasses import ValveStatus
     
 #Otocni ventil 1
     

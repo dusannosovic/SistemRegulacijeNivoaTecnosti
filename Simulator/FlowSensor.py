@@ -2,15 +2,9 @@ import datetime
 import socketserver
 import threading
 import time
-from enum import IntEnum, Enum
 from random import random
-
-
+from EnumClasses import SensorStatus
     
-class SensorStatus(IntEnum):
-    OK= 0 # when pump in operation
-    FAILED = 1 # turned off
-
     
 class FlowSensor():
     def __init__(self, sensor_ip = "localhost", sensor_port = 10501, sensor_fail_rate = 0):

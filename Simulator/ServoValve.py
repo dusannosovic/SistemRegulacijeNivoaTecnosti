@@ -2,25 +2,9 @@ import datetime
 import socketserver
 import threading
 import time
-from enum import IntEnum, Enum
 from random import random
-
-
+from EnumClasses import ServoValveStatus
     
-class ServoValveStatus(IntEnum):
-    Level0percent = 0
-    Level10percent = 10
-    Level20percent = 20
-    Level30percent = 30
-    Level40percent = 40
-    Level50percent = 50
-    Level60percent = 60
-    Level70percent = 70
-    Level80percent = 80
-    Level90percent = 90
-    Level100percent= 100
-    
-
     
 class ServoValve():
     def __init__(self, pump_ip = "localhost", pump_port = 10301, sensor_fail_rate = 0):

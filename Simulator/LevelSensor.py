@@ -2,14 +2,11 @@ import datetime
 import socketserver
 import threading
 import time
-from enum import IntEnum, Enum
+from enum import IntEnum
 from random import random
+from EnumClasses import SensorStatus
 
 
-    
-class SensorStatus(IntEnum):
-    OK= 0 # when pump in operation
-    FAILED = 1 # turned off
 class WaterLevel(IntEnum):
     Level0percent = 0
     Level10percent = 10

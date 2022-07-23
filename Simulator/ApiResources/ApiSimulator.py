@@ -1,6 +1,8 @@
 import json
 from flask import current_app, jsonify, make_response
 from flask_restful import Resource
+from EnumClasses import ValveStatus, PumpOperation
+
 
 class ApiSimulator(Resource):
     
@@ -32,16 +34,20 @@ class ApiSimulator(Resource):
                     "status": servo_valve.read_valve_status()
                 },
                 "valve1":{
-                    "status": valve1.read_valve_status()
+                    "status": valve1.read_valve_status(),
+                    "status_text": ValveStatus(valve1.read_valve_status()).name
                 },
                 "valve2":{
-                    "status": valve2.read_valve_status()
+                    "status": valve2.read_valve_status(),
+                    "status_text": ValveStatus(valve2.read_valve_status()).name
                 },
                 "valve3":{
-                    "status": valve3.read_valve_status()
+                    "status": valve3.read_valve_status(),
+                    "status_text": ValveStatus(valve3.read_valve_status()).name
                 },
                 "water_pump":{
-                    "status": water_pump.read_pump_operation()
+                    "status": water_pump.read_pump_operation(),
+                    "status_text": PumpOperation(water_pump.read_pump_operation()).name
                 },
             }   
             return make_response(jsonify(ret_val) , 200)
