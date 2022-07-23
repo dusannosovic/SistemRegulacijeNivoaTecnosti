@@ -41,16 +41,19 @@ TOPICS = {
 # client nakon dobavljanja podataka od rest api-ja parsira podatke i za svaki element publish-uje
 # na odgovarajuci topic
 
-# PRILIKOM SUBSCRIBE NA TOPIC-e ISPOD POTREBNO JE:
-# Aktuatori -> na kraj topica dodati samo '/Status'
-# Senzori   -> na kraj topica dodati '/Status' i '/Value'
-
 TOPIC_FOR_INVIEW = {
+    # Ovo je za 0/1 vrednosti i servo koji ide od 0-100
     "valve1_status": "ibis_2022/NivoRegTecnosti/InView/Ventil1/Status",
     "valve2_status": "ibis_2022/NivoRegTecnosti/InView/Ventil2/Status",
     "valve3_status": "ibis_2022/NivoRegTecnosti/InView/Ventil3/Status",
     "servo_valve_status": "ibis_2022/NivoRegTecnosti/InView/ServoVentil/Status",
     "water_pump_status": "ibis_2022/NivoRegTecnosti/InView/Waterpump/Status",
+    
+    # Ovo je za ON/OFF vrednosti (servo ovde ne treba jer mu je status uvek brojcana vrednost 0-100 )
+    "valve1_status_text": "ibis_2022/NivoRegTecnosti/InView/Ventil1/StatusText",
+    "valve2_status_text": "ibis_2022/NivoRegTecnosti/InView/Ventil2/StatusText",
+    "valve3_status_text": "ibis_2022/NivoRegTecnosti/InView/Ventil3/StatusText",
+    "water_pump_status_text": "ibis_2022/NivoRegTecnosti/InView/Waterpump/StatusText",
 
     "flow_sensor_status": "ibis_2022/NivoRegTecnosti/InView/FlowSensor/Status",
     "level_sensor_status": "ibis_2022/NivoRegTecnosti/InView/LevelSensor/Status",
@@ -59,14 +62,6 @@ TOPIC_FOR_INVIEW = {
     "flow_sensor_value": "ibis_2022/NivoRegTecnosti/InView/FlowSensor/Value",
     "level_sensor_value": "ibis_2022/NivoRegTecnosti/InView/LevelSensor/Value",
     "outflow_sensor_value": "ibis_2022/NivoRegTecnosti/InView/OutflowSensor/Value",
-    
-    
-    #aktuatori imaju samo status
-    #"valve2": ("ibis_2022/NivoRegTecnosti/InView/Ventil2/Value", 0),
-    
-    # ovo na kraju topic-a (VALUE ili STATUS) se menja u OnChangeClass-i
-    #"outflowsensor": ("ibis_2022/NivoRegTecnosti/InView/OutflowSensor/Value", 0),
-    #"outflowsensor_status": ("ibis_2022/NivoRegTecnosti/InView/OutflowSensor/Status", 0),
 }
 
 
