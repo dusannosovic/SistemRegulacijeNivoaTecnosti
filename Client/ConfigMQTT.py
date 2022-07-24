@@ -24,12 +24,15 @@ TOPICS = {
     "servoventil_value": ("ibis_2022/NivoRegTecnosti/ServoVentil/Value", 0),
     "waterpump_value": ("ibis_2022/NivoRegTecnosti/Waterpump/Value", 0),
 
+    # Ovo nismo povezali na InView, reseno je preko toggle button-a
     "ventil1_reset": ("ibis_2022/NivoRegTecnosti/Ventil1/Reset", 0),
     "ventil2_reset": ("ibis_2022/NivoRegTecnosti/Ventil2/Reset", 0),
     "ventil3_reset": ("ibis_2022/NivoRegTecnosti/Ventil3/Reset", 0),
-    "servoventil_reset": ("ibis_2022/NivoRegTecnosti/ServoVentil/Reset", 0),
     "waterpump_reset": ("ibis_2022/NivoRegTecnosti/Waterpump/Reset", 0),
+    # -----------------------------------------------------------------------
 
+    "servoventil_reset": ("ibis_2022/NivoRegTecnosti/ServoVentil/Reset", 0),
+    
     "flowsensor_reset": ("ibis_2022/NivoRegTecnosti/FlowSensor/Reset", 0),
     "levelsensor_reset": ("ibis_2022/NivoRegTecnosti/LevelSensor/Reset", 0),
     "outflowsensor_reset": ("ibis_2022/NivoRegTecnosti/OutflowSensor/Reset", 0),

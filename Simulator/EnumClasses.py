@@ -7,12 +7,13 @@ class SensorStatus(IntEnum):
 class ValveStatus(IntEnum):
     ON = 1 # valve on
     OFF = 0 # valve off
+    FAILED = -1 #failed valve
 
 
 class PumpOperation(IntEnum):
     ON = 1 # when pump in operation
     OFF = 0 # turned off
-    
+    FAILED = -1 #failed pump
 
 class ServoValveStatus(IntEnum):
     Level0percent = 0

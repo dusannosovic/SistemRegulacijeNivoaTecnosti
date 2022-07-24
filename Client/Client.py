@@ -152,7 +152,7 @@ def DataCheck(client):
             
             #client.publish(ALL_DATA_TOPIC, json.dumps(ret_val.json()))
             
-            time.sleep(2)
+            time.sleep(0.5)
             
         except BaseException as exception:
             print(exception)
