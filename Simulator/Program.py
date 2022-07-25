@@ -32,7 +32,8 @@ def thread_function(level_sensor, flow_sensor, valve1, valve2, valve3, water_pum
         
         
         water_flow= water_pump.read_water_per_second()*water_pump.read_pump_operation()*valve3.read_valve_status()*servo_valve.read_valve_status()/100
-        flow_sensor.set_sensor_value(water_flow)
+        if flow_sensor.read_sensor_value():
+            flow_sensor.set_sensor_value(water_flow)
         pump_outflow_tank = 0
         #water_tank += water_flow
         outflow = 0
@@ -50,8 +51,10 @@ def thread_function(level_sensor, flow_sensor, valve1, valve2, valve3, water_pum
             
         water_tank = water_tank + water_flow-outflow
         outflow_water_tank += outflow - pump_outflow_tank
-        level_sensor.set_sensor_value(water_tank)
-        outflow_sensor.set_sensor_value(outflow_water_tank)
+        if level_sensor.read_sensor_status():
+            level_sensor.set_sensor_value(water_tank)
+        if outflow_sensor.read_sensor_status():
+            outflow_sensor.set_sensor_value(outflow_water_tank)
         
         print("-------------------------------------------------------")
         print("Level sensor",level_sensor.read_sensor_value(), "cm")
