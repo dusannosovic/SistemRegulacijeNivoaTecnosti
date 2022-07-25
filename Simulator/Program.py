@@ -24,8 +24,8 @@ from OutflowSensor import OutflowSensor
 
 def thread_function(level_sensor, flow_sensor, valve1, valve2, valve3, water_pump,servo_valve, outflow_sensor):
     water_flow = 0
-    water_tank = 0
-    outflow_water_tank = 0
+    water_tank = 5000
+    outflow_water_tank = 5000
     outflow_water =0
     #tank = 0
     while(True):
@@ -33,16 +33,23 @@ def thread_function(level_sensor, flow_sensor, valve1, valve2, valve3, water_pum
         
         water_flow= water_pump.read_water_per_second()*water_pump.read_pump_operation()*valve3.read_valve_status()*servo_valve.read_valve_status()/100
         flow_sensor.set_sensor_value(water_flow)
+        pump_outflow_tank = 0
         #water_tank += water_flow
         outflow = 0
         if water_tank>0 and valve1.read_water_per_second()*valve1.read_valve_status() + valve2.read_water_per_second()*valve2.read_valve_status()<water_tank:
             outflow = valve1.read_water_per_second()*valve1.read_valve_status() + valve2.read_water_per_second()*valve2.read_valve_status()
+            
             #water_tank-=outflow
         elif valve1.read_water_per_second()*valve1.read_valve_status() + valve2.read_water_per_second()*valve2.read_valve_status()>water_tank:
             outflow = water_tank
             #water_tank-=outflow
+        if outflow_water_tank>0 and water_pump.read_pump_operation() and water_flow<=outflow_water_tank+outflow:
+            pump_outflow_tank = water_flow
+        elif outflow_water_tank>0 and water_pump.read_pump_operation() and water_flow>outflow_water_tank+outflow:
+            pump_outflow_tank = outflow_water_tank+outflow
+            
         water_tank = water_tank + water_flow-outflow
-        outflow_water_tank += outflow
+        outflow_water_tank += outflow - pump_outflow_tank
         level_sensor.set_sensor_value(water_tank)
         outflow_sensor.set_sensor_value(outflow_water_tank)
         
@@ -58,17 +65,13 @@ if __name__ == "__main__":
     level_sensor = LevelSensor()
     flow_sensor = FlowSensor()
     valve1 = Valve1()
-    valve1.water_per_second = 5
-    valve1.set_valve_status(1)
+    valve1.water_per_second = 10
     valve2 = Valve2()
-    valve2.water_per_second = 3
-    #valve2.set_valve_status(1)
+    valve2.water_per_second = 7
     valve3 = Valve3()
-    valve3.set_valve_status(1)
     servo_valve = ServoValve()
-    servo_valve.set_valve_status(53)
+    servo_valve.set_valve_status(0)
     water_pump = WaterPump()
-    water_pump.set_pump_operation(1)
     water_pump.set_pump_capacity(15)
     outflow_sensor = OutflowSensor()
     
