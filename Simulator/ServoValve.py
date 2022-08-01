@@ -13,11 +13,16 @@ class ServoValve():
         self.network_port = pump_port
 
         self.servo_valve_status = ServoValveStatus.Level0percent
-        
     
             
     def read_valve_status(self):
         return int(self.servo_valve_status)
+
+    def read_valve_status_simulation(self):
+        if self.servo_valve_status<0:
+            return 0
+        else :
+            return int(self.servo_valve_status)
     
     def set_valve_status(self, number):
         round_value = round(number/10)*10

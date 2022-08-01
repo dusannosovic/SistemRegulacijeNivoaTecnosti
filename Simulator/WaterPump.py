@@ -19,6 +19,11 @@ class WaterPump():
             
     def read_pump_operation(self):
         return int(self.pump_operation)
+    def read_pump_operation_simulation(self):
+        if self.pump_operation<0:
+            return 0
+        else :
+            return int(self.pump_operation)
     
     def set_pump_operation(self, number):
         self.pump_operation = PumpOperation(number)

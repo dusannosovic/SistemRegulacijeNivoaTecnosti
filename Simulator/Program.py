@@ -30,30 +30,30 @@ def thread_function(level_sensor, flow_sensor, valve1, valve2, valve3, water_pum
     #tank = 0
     while(True):
         
+        water_flow= water_pump.read_water_per_second()*water_pump.read_pump_operation_simulation()*valve3.read_valve_status_simulation()*servo_valve.read_valve_status_simulation()/100
         
-        water_flow= water_pump.read_water_per_second()*water_pump.read_pump_operation()*valve3.read_valve_status()*servo_valve.read_valve_status()/100
-        if flow_sensor.read_sensor_value():
+        if not flow_sensor.read_sensor_status():
             flow_sensor.set_sensor_value(water_flow)
         pump_outflow_tank = 0
         #water_tank += water_flow
         outflow = 0
-        if water_tank>0 and valve1.read_water_per_second()*valve1.read_valve_status() + valve2.read_water_per_second()*valve2.read_valve_status()<water_tank:
-            outflow = valve1.read_water_per_second()*valve1.read_valve_status() + valve2.read_water_per_second()*valve2.read_valve_status()
-            
-            #water_tank-=outflow
-        elif valve1.read_water_per_second()*valve1.read_valve_status() + valve2.read_water_per_second()*valve2.read_valve_status()>water_tank:
+        if water_tank>0 and valve1.read_water_per_second()*valve1.read_valve_status_simulation() + valve2.read_water_per_second()*valve2.read_valve_status_simulation()<water_tank:
+            outflow = valve1.read_water_per_second()*valve1.read_valve_status_simulation() + valve2.read_water_per_second()*valve2.read_valve_status_simulation()
+        elif valve1.read_water_per_second()*valve1.read_valve_status_simulation() + valve2.read_water_per_second()*valve2.read_valve_status_simulation()>water_tank:
             outflow = water_tank
-            #water_tank-=outflow
-        if outflow_water_tank>0 and water_pump.read_pump_operation() and water_flow<=outflow_water_tank+outflow:
+
+
+
+        if outflow_water_tank>0 and water_pump.read_pump_operation_simulation() and water_flow<=outflow_water_tank+outflow:
             pump_outflow_tank = water_flow
-        elif outflow_water_tank>0 and water_pump.read_pump_operation() and water_flow>outflow_water_tank+outflow:
+        elif outflow_water_tank>0 and water_pump.read_pump_operation_simulation() and water_flow>outflow_water_tank+outflow:
             pump_outflow_tank = outflow_water_tank+outflow
             
         water_tank = water_tank + water_flow-outflow
         outflow_water_tank += outflow - pump_outflow_tank
-        if level_sensor.read_sensor_status():
+        if not level_sensor.read_sensor_status():
             level_sensor.set_sensor_value(water_tank)
-        if outflow_sensor.read_sensor_status():
+        if not outflow_sensor.read_sensor_status():
             outflow_sensor.set_sensor_value(outflow_water_tank)
         
         print("-------------------------------------------------------")

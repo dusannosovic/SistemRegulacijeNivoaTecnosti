@@ -16,6 +16,7 @@ class PumpOperation(IntEnum):
     FAILED = -1 #failed pump
 
 class ServoValveStatus(IntEnum):
+    FAILED = -1
     Level0percent = 0
     Level10percent = 10
     Level20percent = 20

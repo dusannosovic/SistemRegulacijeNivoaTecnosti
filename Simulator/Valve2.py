@@ -20,6 +20,11 @@ class Valve2():
             
     def read_valve_status(self):
         return int(self.valve_status)
+    def read_valve_status_simulation(self):
+        if self.valve_status<0:
+            return 0
+        else :
+            return int(self.valve_status)
     
     def set_valve_status(self, number):
         self.valve_status = ValveStatus(number)

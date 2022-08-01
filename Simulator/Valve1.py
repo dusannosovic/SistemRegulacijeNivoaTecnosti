@@ -20,6 +20,11 @@ class Valve1():
             
     def read_valve_status(self):
         return int(self.valve_status)
+    def read_valve_status_simulation(self):
+        if self.valve_status<0:
+            return 0
+        else :
+            return int(self.valve_status)
     
     def set_valve_status(self, number):
         self.valve_status = ValveStatus(number)
@@ -37,7 +42,7 @@ class Valve1():
     def read_network_port(self):
         return self.network_port
     
-    def step(self,temp_level,max_level):
+    def step(self):
         if ((0 < self.fail_rate) and (self.fail_rate<=100)):
             if (self.has_fault is False):
                 if (random() <= (self.fail_rate / 100)): 
