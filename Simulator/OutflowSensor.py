@@ -26,7 +26,7 @@ class OutflowSensor():
         
         self.network_ip = sensor_ip
         self.network_port = sensor_port
-
+        self.fail_rate = sensor_fail_rate
         self.sensor_status = SensorStatus.OK
 
         self.sensor_value = 0
@@ -58,14 +58,14 @@ class OutflowSensor():
     
     def step(self):
         if ((0 < self.fail_rate) and (self.fail_rate<=100)):
-            if (self.has_fault is False):
+            if (self.sensor_status is not SensorStatus.FAILED):
                 if (random() <= (self.fail_rate / 100)): 
-                    self.has_fault = True
-                    self.error_counter = 2 # count 2x10 seconds with a 10-second step
+                    #self.has_fault = True
+                    self.error_counter = 20 # count 2x10 seconds with a 10-second step
                     self.sensor_status = SensorStatus.FAILED
             else:
                 if (self.error_counter <= 0):
-                    self.has_fault = False # reset fault after fault duration countdown expires
+                    #self.has_fault = False # reset fault after fault duration countdown expires
                     self.error_counter = 0
                     self.sensor_status = SensorStatus.OK
                 else:

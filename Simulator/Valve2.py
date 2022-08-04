@@ -8,11 +8,11 @@ from EnumClasses import ValveStatus
 #Otocni ventil 2
     
 class Valve2():
-    def __init__(self, pump_ip = "localhost", pump_port = 10102, sensor_fail_rate = 0, water_per_second = 1):
+    def __init__(self, pump_ip = "localhost", pump_port = 10102, sensor_fail_rate = 1, water_per_second = 1):
         
         self.network_ip = pump_ip
         self.network_port = pump_port
-
+        self.fail_rate = sensor_fail_rate
         self.water_per_second = water_per_second
         self.valve_status = ValveStatus.OFF
         
@@ -42,21 +42,22 @@ class Valve2():
     def read_network_port(self):
         return self.network_port
 
-    
-    def step(self,temp_level,max_level):
+    def step(self):
         if ((0 < self.fail_rate) and (self.fail_rate<=100)):
-            if (self.has_fault is False):
+            if (self.valve_status is not ValveStatus.FAILED):
                 if (random() <= (self.fail_rate / 100)): 
-                    self.has_fault = True
-                    self.error_counter = 2 # count 2x10 seconds with a 10-second step
-                    #self.sensor_status = SensorStatus.FAILED
+                    #self.has_fault = True
+                    self.error_counter = 20 # count 2x10 seconds with a 10-second step
+                    self.valve_status = ValveStatus.FAILED
             else:
                 if (self.error_counter <= 0):
-                    self.has_fault = False # reset fault after fault duration countdown expires
+                    #self.has_fault = False # reset fault after fault duration countdown expires
                     self.error_counter = 0
-                    #self.sensor_status = SensorStatus.OK
+                    self.valve_status = ValveStatus.OFF
                 else:
                     self.error_counter = self.error_counter - 1
         else:
             val = 1 # do nothing
+    
+
     
