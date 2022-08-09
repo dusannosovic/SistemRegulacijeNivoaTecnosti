@@ -48,6 +48,7 @@ class OutflowSensor():
     
     def reset_sensor(self):
         self.sensor_status = SensorStatus.OK # TODO: implement a more elaborate reset logic
+        self.error_counter = 0
         return 0
         
     def read_network_ip(self):

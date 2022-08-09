@@ -27,10 +27,12 @@ class Valve3():
     
     def set_valve_status(self, number):
         self.valve_status = ValveStatus(number)
+        
     
     
     def reset_valve(self):
         self.valve_status = ValveStatus.OFF # TODO: implement a more elaborate reset logic
+        self.error_counter = 0
         return 0
         
     def read_network_ip(self):

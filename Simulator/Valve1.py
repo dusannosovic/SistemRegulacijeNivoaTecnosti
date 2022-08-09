@@ -34,6 +34,7 @@ class Valve1():
     
     def reset_valve(self):
         self.valve_status = ValveStatus.OFF # TODO: implement a more elaborate reset logic
+        self.error_counter = 0
         return 0
         
     def read_network_ip(self):

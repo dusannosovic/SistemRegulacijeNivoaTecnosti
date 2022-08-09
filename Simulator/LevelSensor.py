@@ -27,7 +27,8 @@ class LevelSensor():
         self.network_ip = sensor_ip
         self.network_port = sensor_port
         self.fail_rate = sensor_fail_rate
-        self.sensor_status = SensorStatus.OK
+        self.sensor_status = SensorStatus.FAILED
+        self.error_counter = 500
 
         self.sensor_value = 0
         
@@ -48,6 +49,7 @@ class LevelSensor():
     
     def reset_sensor(self):
         self.sensor_status = SensorStatus.OK # TODO: implement a more elaborate reset logic
+        self.error_counter = 0
         return 0
         
     def read_network_ip(self):

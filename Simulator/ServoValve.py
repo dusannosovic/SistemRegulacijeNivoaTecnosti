@@ -31,6 +31,7 @@ class ServoValve():
     
     def reset_valve(self):
         self.servo_valve_status = ServoValveStatus.Level0percent # TODO: implement a more elaborate reset logic
+        self.error_counter = 0
         return 0
         
     def read_network_ip(self):

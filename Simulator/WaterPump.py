@@ -36,6 +36,7 @@ class WaterPump():
     
     def reset_pump(self):
         self.pump_operation = PumpOperation.OFF # TODO: implement a more elaborate reset logic
+        self.error_counter = 0
         return 0
         
     def read_network_ip(self):

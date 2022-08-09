@@ -14,7 +14,8 @@ class Valve2():
         self.network_port = pump_port
         self.fail_rate = sensor_fail_rate
         self.water_per_second = water_per_second
-        self.valve_status = ValveStatus.OFF
+        self.valve_status = ValveStatus.FAILED
+        self.error_counter = 500
         
     
             
@@ -34,6 +35,7 @@ class Valve2():
 
     def reset_valve(self):
         self.valve_status = ValveStatus.OFF # TODO: implement a more elaborate reset logic
+        self.error_counter = 0
         return 0
         
     def read_network_ip(self):
