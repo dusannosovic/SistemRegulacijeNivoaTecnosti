@@ -35,19 +35,23 @@ class ApiSimulator(Resource):
                 },
                 "valve1":{
                     "status": valve1.read_valve_status(),
-                    "status_text": ValveStatus(valve1.read_valve_status()).name
+                    "status_text": ValveStatus(valve1.read_valve_status()).name,
+                    "alarm": 1 if ValveStatus(valve1.read_valve_status()).name == ValveStatus.FAILED.name else 0
                 },
                 "valve2":{
                     "status": valve2.read_valve_status(),
-                    "status_text": ValveStatus(valve2.read_valve_status()).name
+                    "status_text": ValveStatus(valve2.read_valve_status()).name,
+                    "alarm": 1 if ValveStatus(valve2.read_valve_status()).name == ValveStatus.FAILED.name else 0
                 },
                 "valve3":{
                     "status": valve3.read_valve_status(),
-                    "status_text": ValveStatus(valve3.read_valve_status()).name
+                    "status_text": ValveStatus(valve3.read_valve_status()).name,
+                    "alarm": 1 if ValveStatus(valve3.read_valve_status()).name == ValveStatus.FAILED.name else 0
                 },
                 "water_pump":{
                     "status": water_pump.read_pump_operation(),
-                    "status_text": PumpOperation(water_pump.read_pump_operation()).name
+                    "status_text": PumpOperation(water_pump.read_pump_operation()).name,
+                    "alarm": 1 if PumpOperation(water_pump.read_pump_operation()).name == PumpOperation.FAILED.name else 0
                 },
             }   
             return make_response(jsonify(ret_val) , 200)

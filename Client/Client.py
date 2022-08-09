@@ -88,19 +88,19 @@ def ParseAndProcessData(data, client):
     #valve1.status = data["valve1"]["status"]
     client.publish(TOPIC_FOR_INVIEW["valve1_status"], data["valve1"]["status"])
     client.publish(TOPIC_FOR_INVIEW["valve1_status_text"], data["valve1"]["status_text"])
-    client.publish(TOPIC_FOR_INVIEW["valve1_status_for_alarm"], data["valve1"]["status"])
+    client.publish(TOPIC_FOR_INVIEW["valve1_status_for_alarm"], data["valve1"]["alarm"])
     
     #valve2 props
     #valve2.status = data["valve2"]["status"]
     client.publish(TOPIC_FOR_INVIEW["valve2_status"], data["valve2"]["status"])
     client.publish(TOPIC_FOR_INVIEW["valve2_status_text"], data["valve2"]["status_text"])
-    client.publish(TOPIC_FOR_INVIEW["valve2_status_for_alarm"], data["valve2"]["status"])
+    client.publish(TOPIC_FOR_INVIEW["valve2_status_for_alarm"], data["valve2"]["alarm"])
     
     #valve3 props
     #valve3.status = data["valve3"]["status"]
     client.publish(TOPIC_FOR_INVIEW["valve3_status"], data["valve3"]["status"])
     client.publish(TOPIC_FOR_INVIEW["valve3_status_text"], data["valve3"]["status_text"])
-    client.publish(TOPIC_FOR_INVIEW["valve3_status_for_alarm"], data["valve3"]["status"])
+    client.publish(TOPIC_FOR_INVIEW["valve3_status_for_alarm"], data["valve3"]["alarm"])
     
     #servo valve props
     #servo_valve.status = data["servo_valve"]["status"]
@@ -110,7 +110,7 @@ def ParseAndProcessData(data, client):
     #water_pump.status = data["water_pump"]["status"]
     client.publish(TOPIC_FOR_INVIEW["water_pump_status"], data["water_pump"]["status"])
     client.publish(TOPIC_FOR_INVIEW["water_pump_status_text"], data["water_pump"]["status_text"])
-    client.publish(TOPIC_FOR_INVIEW["water_pump_status_for_alarm"], data["water_pump"]["status"])
+    client.publish(TOPIC_FOR_INVIEW["water_pump_status_for_alarm"], data["water_pump"]["alarm"])
     
     #flow sensor props
     #flow_sensor.status = data["flow_sensor"]["status"]
