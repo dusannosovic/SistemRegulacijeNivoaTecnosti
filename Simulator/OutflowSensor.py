@@ -22,7 +22,7 @@ class WaterLevel(IntEnum):
 
     
 class OutflowSensor():
-    def __init__(self, sensor_ip = "localhost", sensor_port = 10402, sensor_fail_rate = 0):
+    def __init__(self, sensor_ip = "localhost", sensor_port = 10402, sensor_fail_rate = 1):
         
         self.network_ip = sensor_ip
         self.network_port = sensor_port

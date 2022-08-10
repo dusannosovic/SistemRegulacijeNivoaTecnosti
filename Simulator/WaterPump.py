@@ -7,7 +7,7 @@ from EnumClasses import PumpOperation
 
     
 class WaterPump():
-    def __init__(self, pump_ip = "localhost", pump_port = 10201, sensor_fail_rate = 0, water_per_second=1):
+    def __init__(self, pump_ip = "localhost", pump_port = 10201, sensor_fail_rate = 1, water_per_second=1):
         
         self.network_ip = pump_ip
         self.network_port = pump_port

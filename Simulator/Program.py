@@ -44,20 +44,21 @@ def thread_function(level_sensor, flow_sensor, valve1, valve2, valve3, water_pum
             if outflow_tank_capacity-outflow_water_tank < outflow:
                 outflow = outflow_tank_capacity-outflow_water_tank
         elif valve1.read_water_per_second()*valve1.read_valve_status_simulation() + valve2.read_water_per_second()*valve2.read_valve_status_simulation()>water_tank:
-            if water_tank>outflow_tank_capacity-outflow_water_tank:
+            outflow = water_tank
+            if outflow_tank_capacity-outflow_water_tank < outflow:
                 outflow = outflow_tank_capacity-outflow_water_tank
-            elif water_tank<outflow_tank_capacity-outflow_water_tank:
-                outflow = water_tank
 
 
         if outflow_water_tank>0 and water_pump.read_pump_operation_simulation() and water_flow<=outflow_water_tank+outflow and water_tank_capacity-water_tank>=water_flow:
             pump_outflow_tank = water_flow
+            if water_tank_capacity-water_tank<pump_outflow_tank:
+                pump_outflow_tank = water_tank_capacity-water_tank
         elif outflow_water_tank>0 and water_pump.read_pump_operation_simulation() and water_flow>outflow_water_tank+outflow:
             pump_outflow_tank = outflow_water_tank+outflow
-        elif outflow_water_tank>0 and water_pump.read_pump_operation_simulation() and water_flow> water_tank_capacity-water_tank<water_flow:
-            pump_outflow_tank = water_tank_capacity-water_tank
+            if water_tank_capacity-water_tank<pump_outflow_tank:
+                pump_outflow_tank = water_tank_capacity-water_tank
             
-        water_tank = water_tank + water_flow-outflow
+        water_tank = water_tank + pump_outflow_tank-outflow
         outflow_water_tank += outflow - pump_outflow_tank
         if not level_sensor.read_sensor_status():
             level_sensor.set_sensor_value(water_tank)
