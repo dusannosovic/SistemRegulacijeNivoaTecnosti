@@ -70,5 +70,6 @@ TOPIC_FOR_INVIEW = {
     "valve1_status_for_alarm": "ibis_2022/NivoRegTecnosti/InView/Ventil1/Alarm",
     "valve2_status_for_alarm": "ibis_2022/NivoRegTecnosti/InView/Ventil2/Alarm",
     "valve3_status_for_alarm": "ibis_2022/NivoRegTecnosti/InView/Ventil3/Alarm",
+    "servo_valve_status_for_alarm": "ibis_2022/NivoRegTecnosti/InView/ServoVentil/Alarm",
     "water_pump_status_for_alarm": "ibis_2022/NivoRegTecnosti/InView/Waterpump/Alarm",
 }

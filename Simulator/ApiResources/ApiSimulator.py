@@ -1,7 +1,7 @@
 import json
 from flask import current_app, jsonify, make_response
 from flask_restful import Resource
-from EnumClasses import ValveStatus, PumpOperation
+from EnumClasses import ValveStatus, PumpOperation, ServoValveStatus
 
 
 class ApiSimulator(Resource):
@@ -31,7 +31,8 @@ class ApiSimulator(Resource):
                     "value" : outflow_sensor.read_sensor_value()
                 },
                 "servo_valve":{
-                    "status": servo_valve.read_valve_status()
+                    "status": servo_valve.read_valve_status(),
+                    "alarm": 1 if ServoValveStatus(servo_valve.read_valve_status()).name == ValveStatus.FAILED.name else 0
                 },
                 "valve1":{
                     "status": valve1.read_valve_status(),

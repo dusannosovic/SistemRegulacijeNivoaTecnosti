@@ -105,6 +105,7 @@ def ParseAndProcessData(data, client):
     #servo valve props
     #servo_valve.status = data["servo_valve"]["status"]
     client.publish(TOPIC_FOR_INVIEW["servo_valve_status"], data["servo_valve"]["status"])
+    client.publish(TOPIC_FOR_INVIEW["servo_valve_status_for_alarm"], data["servo_valve"]["alarm"])
     
     #waterpump props
     #water_pump.status = data["water_pump"]["status"]

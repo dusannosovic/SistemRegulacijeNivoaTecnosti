@@ -13,6 +13,7 @@ class ServoValve():
         self.network_port = pump_port
         self.fail_rate = sensor_fail_rate
         self.servo_valve_status = ServoValveStatus.Level0percent
+        self.error_counter = 0
     
             
     def read_valve_status(self):
