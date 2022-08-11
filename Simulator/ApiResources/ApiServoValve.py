@@ -39,7 +39,7 @@ class ApiServoValve(Resource):
                 new_value = body_params['value']
                 new_value = float(new_value)
                                 
-                if new_value < 0 or new_value > 100:
+                if new_value < 4 or new_value > 20:
                     return json.dumps({"Message": "Invalid value for servo valve status"}), 400
                 
                 servo_valve.set_valve_status(new_value)

@@ -17,14 +17,4 @@ class PumpOperation(IntEnum):
 
 class ServoValveStatus(IntEnum):
     FAILED = -1
-    Level0percent = 0
-    Level10percent = 10
-    Level20percent = 20
-    Level30percent = 30
-    Level40percent = 40
-    Level50percent = 50
-    Level60percent = 60
-    Level70percent = 70
-    Level80percent = 80
-    Level90percent = 90
-    Level100percent= 100
+    OK = 0

@@ -32,7 +32,7 @@ class ApiSimulator(Resource):
                 },
                 "servo_valve":{
                     "status": servo_valve.read_valve_status(),
-                    "alarm": 1 if ServoValveStatus(servo_valve.read_valve_status()).name == ValveStatus.FAILED.name else 0
+                    "alarm": 1 if servo_valve.read_valve_status() == -1 else 0
                 },
                 "valve1":{
                     "status": valve1.read_valve_status(),

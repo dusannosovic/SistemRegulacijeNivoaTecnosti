@@ -12,7 +12,7 @@ class ServoValve():
         self.network_ip = pump_ip
         self.network_port = pump_port
         self.fail_rate = sensor_fail_rate
-        self.servo_valve_status = ServoValveStatus.Level0percent
+        self.servo_valve_status = 0
         self.error_counter = 0
     
             
@@ -25,13 +25,15 @@ class ServoValve():
         else :
             return int(self.servo_valve_status)
     
-    def set_valve_status(self, number):
-        round_value = round(number/10)*10
-        self.servo_valve_status = ServoValveStatus(round_value)
+    def set_valve_status(self, current):
+        value = (current-4)/(20-4)
+        #round_value = round(number/10)*10
+        if value >=0 and value <= 100:
+            self.servo_valve_status = value*100
     
     
     def reset_valve(self):
-        self.servo_valve_status = ServoValveStatus.Level0percent # TODO: implement a more elaborate reset logic
+        self.servo_valve_status = 0 # TODO: implement a more elaborate reset logic
         self.error_counter = 0
         return 0
         
@@ -52,7 +54,7 @@ class ServoValve():
                 if (self.error_counter <= 0):
                     #self.has_fault = False # reset fault after fault duration countdown expires
                     self.error_counter = 0
-                    self.sensor_valve_status = ServoValveStatus.Level0percent
+                    self.sensor_valve_status = 0
                 else:
                     self.error_counter = self.error_counter - 1
         else:

@@ -14,6 +14,7 @@ class WaterPump():
         self.fail_rate = sensor_fail_rate
         self.pump_water_per_second = water_per_second
         self.pump_operation = PumpOperation.OFF
+        self.error_counter = 0
         
     
             

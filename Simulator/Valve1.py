@@ -15,6 +15,7 @@ class Valve1():
         self.fail_rate = sensor_fail_rate
         self.water_per_second = water_per_second
         self.valve_status = ValveStatus.OFF
+        self.error_counter = 0
         
     
             

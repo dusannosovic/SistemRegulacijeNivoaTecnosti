@@ -13,6 +13,7 @@ class Valve3():
         self.network_port = pump_port
         self.fail_rate = sensor_fail_rate
         self.valve_status = ValveStatus.OFF
+        self.error_counter = 0
         
     
             

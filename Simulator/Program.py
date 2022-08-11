@@ -91,7 +91,7 @@ if __name__ == "__main__":
     valve2.water_per_second = 7
     valve3 = Valve3()
     servo_valve = ServoValve()
-    servo_valve.set_valve_status(0)
+    servo_valve.set_valve_status(4)
     water_pump = WaterPump()
     water_pump.set_pump_capacity(15)
     outflow_sensor = OutflowSensor()
