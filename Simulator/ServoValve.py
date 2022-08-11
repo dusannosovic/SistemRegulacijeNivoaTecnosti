@@ -26,10 +26,10 @@ class ServoValve():
             return int(self.servo_valve_status)
     
     def set_valve_status(self, current):
-        value = (current-4)/(20-4)
+        value = ((current-4)/(20-4))*100
         #round_value = round(number/10)*10
         if value >=0 and value <= 100:
-            self.servo_valve_status = value*100
+            self.servo_valve_status = value
     
     
     def reset_valve(self):
@@ -49,12 +49,12 @@ class ServoValve():
                 if (random() <= (self.fail_rate / 100)): 
                     #self.has_fault = True
                     self.error_counter = 20 # count 2x10 seconds with a 10-second step
-                    self.sensor_valve_status = -1
+                    self.servo_valve_status = -1
             else:
                 if (self.error_counter <= 0):
                     #self.has_fault = False # reset fault after fault duration countdown expires
                     self.error_counter = 0
-                    self.sensor_valve_status = 0
+                    self.servo_valve_status = 0
                 else:
                     self.error_counter = self.error_counter - 1
         else:

@@ -41,7 +41,10 @@ def subscribe(client: mqtt_client):
                 ret_val = requests.put(baseURL+"valve3/status", json={"value": msg.payload.decode()})
                 print(ret_val.json())
             elif "ServoVentil/Value" in msg.topic:
-                ret_val = requests.put(baseURL+"servovalve/status", json={"value": msg.payload.decode()})
+                percent_value = int(msg.payload.decode())
+                #NewValue = (((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin
+                current_value = (((percent_value - 0) * (20-4)) / (100-0)) + 4
+                ret_val = requests.put(baseURL+"servovalve/status", json={"value": current_value})
                 print(ret_val.json())
             elif "Waterpump/Value" in msg.topic:
                 ret_val = requests.put(baseURL+"waterpump/status", json={"value": msg.payload.decode()})
